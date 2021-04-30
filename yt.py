@@ -2,6 +2,21 @@ import pytube
 from pytube.cli import on_progress
 from os.path import expanduser
 
+
+def ask_continue():
+	yes = 'y'
+	no = 'n'
+
+	ans = input(f'Would you like to continue? ({yes}/{no}): ')
+	if ans == yes:
+		return True
+	elif ans == no:
+		return False
+	else:
+		print(f'You can enter \'{yes}\' or \'{no}\'')
+		return ask_continue()
+
+
 def download():
 	url = input('Enter YouTube video link: ')
 
@@ -22,7 +37,8 @@ def download():
 	else:
 		print('Done!')
 
-	one_more()
+	if ask_continue():
+		one_more()
 
 def one_more():
 	print('\n')
